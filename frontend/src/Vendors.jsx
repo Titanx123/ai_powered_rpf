@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const API_BASE = "http://localhost:4000"; // same as in App.jsx
+const API_BASE = "http://localhost:5002"; // same as in App.jsx
 
 export default function Vendors() {
   const [vendors, setVendors] = useState([]);
@@ -21,12 +21,14 @@ export default function Vendors() {
     e.preventDefault();
     setLoading(true);
     try {
+        console.clear();
+        console.log("form",form)
       await axios.post(`${API_BASE}/api/vendors`, form);
       setForm({ name: "", email: "", phone: "", company: "" });
       await fetchVendors();
     } catch (e) {
       console.error(e);
-      alert("Failed to add vendor");
+    //   alert("Failed to add vendor");
     } finally {
       setLoading(false);
     }
